@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продовження святкування</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3edf7;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            box-sizing: border-box; /* Додає padding до загальної ширини */
+        }
+        .header {
+            font-size: 4em;
+            color: #ff69b4;
+            font-family: 'Lobster', cursive;
+            margin: 20px;
+        }
+        h2 {
+            color: #ff69b4;
+            font-family: 'Lobster', cursive;
+        }
+        .map-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .map-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            max-width: 100%; /* Забезпечує, що блок не виходить за межі контейнера */
+            position: relative;
+        }
+        .step-content {
+            display: flex;
+            flex-direction: row; /* Розташування в горизонтальному ряду */
+            align-items: flex-start; /* Вирівнює зображення по верху */
+            justify-content: center; /* Центрує контент по горизонталі */
+            gap: 20px; /* Відстань між зображеннями */
+            width: 100%; /* Забезпечує, що контент не виходить за межі контейнера */
+            position: relative; /* Дозволяє використовувати абсолютне позиціонування для дочірніх елементів */
+        }
+        .book {
+            width: 20%; /* Встановлює ширину для книжки */
+            height: auto;
+            margin-right: -5%; /* Зміщує книжку лівіше від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            top: 0; /* Вирівнює верхній край книжки з верхом контейнера */
+            left: 0; /* Вирівнює лівий край книжки з лівим краєм контейнера */
+        }
+        .school {
+            width: 15%;
+            height: auto;
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            top: 0%; /* Розташовує картинку школи нижче від книжки */
+            left: 70%; 
+        }
+        .opposite-book {
+            width: 17%; /* Встановлює ширину для книжки дзеркально */
+            height: auto;
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            bottom: 20%;
+            right: -3%; /* Зміщує книжку правіше від основної картинки */
+        }
+        .opposite-school {
+            width: 17%;
+            height: auto;
+            position: absolute; 
+            bottom: 20%; 
+            right: 850px;
+        }
+        .laugh {
+            width: 17%; /* Встановлює ширину фото */
+            height: auto;
+            margin-right: 60%; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            top: 0; /* Вирівнює верхній край фото з верхом контейнера */
+        }
+        .drinkingBabies {
+            width: 17%; /* Встановлює ширину фото */
+            height: 53%;
+            margin-right: 60%; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            bottom: 17%; 
+
+        }
+        .party1 {
+            width: 17%; /* Встановлює ширину фото */
+            height: auto;
+            margin-left: 21%; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            top: 0; /* Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+        }
+        .party2 {
+            width: 17%; /* Встановлює ширину фото */
+            height: auto;
+            margin-left: 21%; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            bottom: 10%; 
+        }
+        .uni1 {
+            width: 25%; /* Встановлює ширину фото */
+            height: auto;
+            margin-right: 70%; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            top: 0%; /* Вирівнює верхній край фото з верхом контейнера */
+        }
+        .uni4 {
+            width: 25%; /* Встановлює ширину фото */
+            height: auto;
+            margin-right: 70%; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            /* top: 0; Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+             bottom: 20%; 
+        }
+        .uni2 {
+            width: 28%; /* Встановлює ширину фото */
+            height: auto;
+            /* margin-left: 23%; Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            top: 0; /* Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+            right: 0%;
+        }
+        .uni3 {
+            width: 28%; /* Встановлює ширину фото */
+            height: auto;
+            margin-left: 350px; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            /* top: 0; Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+            bottom: 15%; 
+            right: 0%;
+        }
+        .ania2 {
+            width: 70%; /* Встановлює ширину фото */
+            height: auto;
+            position: absolute; /*Абсолютне позиціонування для точного контролю */
+            top: 0; /*Вирівнює верхній край фото з верхом контейнера */
+            left: -100%; /*Вирівнює лівий край фото з лівим краєм контейнера  */
+        }
+        .ania3 {
+            width: 70%; /* Встановлює ширину фото */
+            height: auto;
+            /* margin-right: 200%; Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            /* top: 0; Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+            bottom: 0%; 
+            left: -100%;
+        }
+        .ania4 {
+            width: 70%; /* Встановлює ширину фото */
+            height: auto;
+            /* margin-left: 300px; Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            /* top: 0; Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+            top: 0%;
+            right: -100%;
+        }
+        .ania5 {
+            width: 70%; /* Встановлює ширину фото */
+            height: auto;
+            /* margin-left: 300px; Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            /* top: 0; Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+            bottom: 0%;
+            right: -100%;
+        }
+        .cutie-left {
+            width: 25%; /* Встановлює ширину фото */
+            height: auto;
+            margin-right: 70%; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            /* top: 0; Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+             bottom: 20%; 
+        }
+        .cutie-right {
+            width: 25%; /* Встановлює ширину фото */
+            height: auto;
+            margin-left: 25%; /* Зміщує фото від основної картинки */
+            position: absolute; /* Абсолютне позиціонування для точного контролю */
+            /* top: 0; Вирівнює верхній край фото з верхом контейнера */
+            /* left: 0; Вирівнює лівий край фото з лівим краєм контейнера */
+             bottom: 20%; 
+        }
+        .main-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .main-video {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .description {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: #4682b4;
+            font-family: 'Lobster', cursive;
+            text-align: left; /* Вирівнює текст по лівому краю */
+            width: 100%; /* Забезпечує, що текст не виходить за межі контейнера */
+            box-sizing: border-box; /* Включає padding у ширину */
+            overflow-wrap: break-word; /* Розбиває довгі слова */
+            word-wrap: break-word; /* Підтримка старих браузерів */
+            padding: 0 10px; /* Додає невелику відстань з боків для зручності */
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #ff1493;
+        }
+        .audio-controls {
+            margin-top: 20px;
+        }
+        .audio-controls audio {
+            width: 300px; /* Ширина плеєра для аудіо */
+        }
+        .audio-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #ff1493;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px;
+            box-shadow: 0 5px #c83773;
+            transition: all 0.3s ease;
+        }
+        .audio-button:hover {
+            background-color: #c83773;
+            box-shadow: 0 7px #c83773;
+            transform: translateY(-2px);
+        }
+        .audio-button:active {
+            box-shadow: 0 2px #c83773;
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Я БАЖАЮ ТОБІ...
+    </div>
+    <div class="audio-controls">
+        <audio id="birthdayAudio" autoplay loop>
+            <source src="happy-birthday-to-you-122428.mp3" type="audio/mpeg">
+            Ваш браузер не підтримує аудіо елементи.
+        </audio>
+        <button class="audio-button" onclick="document.getElementById('birthdayAudio').play()">Відтворити мелодію</button>
+    </div>
+    <div class="map-container">
+        <div class="map-step">
+            <h2>ЗУПИНКА №1</h2>
+            <div class="step-content">
+                <img src="books.png" alt="book left" class="book">
+                <div>
+                    <img src="CryingBaby.jpg" alt="Step 1" class="main-image">
+                    <div class="description">Пам'ятаєш, як першого дня у школі ти була настільки зворушена моментом, що вирішила поплакати за компанію?<br>
+                        Так ось я бажаю тобі плакати за компанію лише в моменти найщасливіших подій у твоєму житті.<br> P.S.: той день теж був щасливим (хоч ми тоді того не усвідомлювали)</div>
+                </div>
+                <img src="school.gif" alt="school left" class="school"> <!-- Додано картинку школи -->
+                <img src="bookvar.jpg" alt="opposite book" class="opposite-book"> <!-- Дзеркальна картинка -->
+                <img src="01004qdh-dd79-717x632-1.png" alt="opposite school" class="opposite-school">
+            </div>
+        </div>
+        <div class="map-step">
+            <h2>ЗУПИНКА №2</h2>
+            <div class="step-content">
+                <img src="cute.gif" alt="cutie left" class="cutie-left">
+                <div>
+                    <img src="together.jpg" alt="Step 2" class="main-image">
+                    <div class="description">А це, напевно, наша перша спільна фотографія.<br>
+                        Вже тоді я відчула, що ти будеш особливою людинкою в моєму житті. Тому так міцно вчепилась у твій лікоть! хі-хі <br>
+                        Сьогодні бажаю тобі, щоб твої близькі завжди були поруч, підтримували тебе, любили та оберігали. <br>
+                        Нехай всі мрії цієї маленької Ані здійсняться! 
+                    </div>
+                <img src="cute.gif" alt="cutie right" class="cutie-right">
+                </div>
+            </div>
+        </div>
+        <div class="map-step">
+            <h2>ЗУПИНКА №3</h2>
+            <div class="step-content">
+                <img src="laugh.jpg" alt="laugh left" class="laugh">
+                <img src="drinkingBabies.jpg" alt="drinkingBabies left" class="drinkingBabies">
+                <div> 
+                    <img src="durko.jpg" alt="Step 3">
+                    <div class="description">Додамо трохи дурощів :)) <br>
+                        Бажаю, щоб завжди знаходився час "на подуркувати", навіть коли тобі вже далеко за 20! (ета жі самсем ні повад ґрустіть)<br>
+                    </div>
+                <img src="party1.jpg" alt="party right" class="party1">
+                <img src="party2.jpg" alt="party2 right" class="party2">
+                </div>
+            </div>
+        </div>
+        <div class="map-step">
+            <h2>ЗУПИНКА №4</h2>
+            <div class="step-content">
+                <img src="uni1.jpg" alt="uni1 right" class="uni1">
+                <img src="uni4.jpg" alt="uni4 right" class="uni4">
+                <div>
+                    <video controls class="main-video">
+                        <source src="video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="description">Незабутні університетські роки...<br>
+                        Што ж, я бажаю тобі стати класним акушер-гінекологом. Ти пройшла довгий шлях, і головне - успішно! Нехай твоя кар'єра буде ще успішнішою (рукі в тєплє і дєнгі в карманє, как гаваріцца)
+                    </div>
+                <img src="uni2.jpg" alt="uni2 left" class="uni2">
+                <img src="uni3.jpg" alt="uni3 left" class="uni3">
+                </div>
+            </div>
+        </div>
+        <div class="map-step">
+            <h2>ЗУПИНКА №5</h2>
+            <div class="step-content"></div>
+            <img src="ania2.jpg" alt="ania2 right" class="ania2">
+            <img src="ania3.jpg" alt="ania3 right" class="ania3">
+            <div>
+                <img src="ania1.jpg" alt="Step 6">
+                <div class="description">Просто будь собою! Ти неймовірна <3</div>
+            <img src="ania4.jpg" alt="ania4 right" class="ania4">
+            <img src="ania5.jpg" alt="ania5 right" class="ania5">
+            </div>
+        </div>
+    </div>
+    <a href="final_page.html" class="button">До розділу "Відео-привітання"</a>
+    <iframe src="music.html" style="display: none;" id="musicFrame"></iframe>
+</body>
+</html>
